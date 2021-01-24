@@ -14,8 +14,9 @@ class EmojiMemoryGame {
     
     // static creates function on a type, not on instance
     static func createMemoryGame() -> MemoryGame<String> {
-        let emojis = ["👻","🎃","🕷"]
-        return MemoryGame<String>(numberOfPairsOfCards: emojis.count) { pairIndex in
+        let emojis = ["🦅","🐣","🐔","🦆","🦉"]
+        let randomInt = Int.random(in: 2..<6)
+        return MemoryGame<String>(numberOfPairsOfCards: randomInt) { pairIndex in
             return emojis[pairIndex]
         } // closure (Int) -> String
     }

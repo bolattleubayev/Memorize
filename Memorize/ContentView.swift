@@ -12,6 +12,8 @@ struct ContentView: View {
     var viewModel: EmojiMemoryGame
     
     var body: some View {
+        
+        let font = viewModel.cards.count < 10 ? Font.largeTitle : Font.title
         return HStack {
             ForEach(viewModel.cards) { card in
                 CardView(card: card).onTapGesture() {
@@ -21,7 +23,7 @@ struct ContentView: View {
         }
             .padding()
             .foregroundColor(Color.orange)
-            .font(Font.largeTitle)
+            .font(font)
     }
 }
 
@@ -30,11 +32,17 @@ struct CardView: View {
     var body: some View {
         ZStack {
             if card.isFaceUp {
-                RoundedRectangle(cornerRadius: 10.0).fill(Color.white)
-                RoundedRectangle(cornerRadius: 10.0).stroke(lineWidth: 3.0)
+                RoundedRectangle(cornerRadius: 10.0)
+                    .fill(Color.white)
+                    .aspectRatio(2/3, contentMode: .fit)
+                RoundedRectangle(cornerRadius: 10.0)
+                    .stroke(lineWidth: 3.0)
+                    .aspectRatio(2/3, contentMode: .fit)
                 Text(card.content)
             } else {
-                RoundedRectangle(cornerRadius: 10.0).fill()
+                RoundedRectangle(cornerRadius: 10.0)
+                    .fill()
+                    .aspectRatio(2/3, contentMode: .fit)
             }
         }
     }
