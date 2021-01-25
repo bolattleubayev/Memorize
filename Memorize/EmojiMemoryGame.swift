@@ -7,10 +7,11 @@
 
 import SwiftUI
 
-class EmojiMemoryGame {
+class EmojiMemoryGame: ObservableObject {
     // private(set) - only EmojiMemoryGame can modify the model, but others can see it
     // private - no access from outside
-    private var model: MemoryGame<String> = EmojiMemoryGame.createMemoryGame()
+    // @Published is a property wrapper calls objectWillChange.send() every time model changes
+    @Published private var model: MemoryGame<String> = EmojiMemoryGame.createMemoryGame()
     
     // static creates function on a type, not on instance
     static func createMemoryGame() -> MemoryGame<String> {
@@ -20,6 +21,7 @@ class EmojiMemoryGame {
             return emojis[pairIndex]
         } // closure (Int) -> String
     }
+    
     // MARK: - Access to the Model
     
     // one line functions that return something, do not need "return" keyword
@@ -29,6 +31,6 @@ class EmojiMemoryGame {
     // MARK: - Intent(s)
     
     func choose(card: MemoryGame<String>.Card) {
-        model.choose(card: card)
+        model.choose(card)
     }
 }
